@@ -23,8 +23,14 @@ const ListProducts = ({ listProduct }: ListProductsProps) => {
     if (!product) return;
 
     setCarrinhoDeCompras(product);
+    if (localStorage.getItem('carrinho')) {
+      const carrinho = JSON.parse(localStorage.getItem('carrinho') || '');
+      carrinho.push(product);
+      localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    } else {
+      localStorage.setItem('carrinho', JSON.stringify([product]));
+    }
   };
-
   return (
     <div>
       {listProduct.map((product: Product) => (
