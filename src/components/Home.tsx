@@ -49,30 +49,43 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <input
-        type='text'
-        placeholder='digite o produto'
-        value={valor}
-        onChange={(e) => handleChange(e)}
-      />
-      <button onClick={handleClickSearch}>Buscar</button>
-
-      <Link to='/carrinho'>Carrinho de compras</Link>
-
-      <Categories
-        categories={categories}
-        handleRadio={handleRadio}
-      />
-
-      {searchProduct ? (
-        <div>
-          <ListProducts listProduct={listProduct} />
+    <main>
+      <section className='flex justify-between'>
+        <div className='m-4'>
+          <input
+            className='input input-bordered input-warning w-full max-w-xs mb-2'
+            type='text'
+            placeholder='digite o produto'
+            value={valor}
+            onChange={(e) => handleChange(e)}
+          />
+          <button
+            className='btn'
+            onClick={handleClickSearch}
+          >
+            Buscar
+          </button>
         </div>
-      ) : (
-        'Nenhum produto Listado'
-      )}
-    </div>
+        <Link
+          className='btn btn-active btn-ghost'
+          to='/carrinho'
+        >
+          Carrinho de compras
+        </Link>
+      </section>
+
+      <div className='flex'>
+        <Categories
+          categories={categories}
+          handleRadio={handleRadio}
+        />
+        {searchProduct ? (
+          <ListProducts listProduct={listProduct} />
+        ) : (
+          'Nenhum produto Listado'
+        )}
+      </div>
+    </main>
   );
 };
 

@@ -10,12 +10,13 @@ type CategoriesProps = {
 
 const Categories = ({ categories, handleRadio }: CategoriesProps) => {
   return (
-    <div>
+    <div className='mr-8'>
       {categories.map((categorie: { id: string; name: string }) => (
         <div key={categorie.id}>
           <p>
             {' '}
             <input
+              className='radio'
               type='radio'
               name='categorieProduct'
               value={categorie.name}

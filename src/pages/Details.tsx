@@ -22,6 +22,7 @@ const Details = () => {
     const fetchProduct = async () => {
       const response = await getProductById(id);
       setProduct(response);
+      console.log(product);
     };
     fetchProduct();
   }, []);
@@ -34,13 +35,13 @@ const Details = () => {
           src={product.thumbnail}
           alt={product.title}
         />
-        <p>{product.title || ''}</p>
-        <p>{product.warranty || ''}</p>
-        <p>Quantidade disponivel: {product.available_quantity || ''}</p>
+        <p>{product.title}</p>
+        <p>{product.warranty}</p>
+        <p>Quantidade disponivel: {product.available_quantity}</p>
         <p>
-          {product.shipping.free_shipping
+          {/* {product.shipping.free_shipping
             ? 'Frete grátis'
-            : 'Calcule seu frete'}
+            : 'Calcule seu frete'}{' '} */}
         </p>
         <p>Preço: R$ {product.price}</p>
       </div>

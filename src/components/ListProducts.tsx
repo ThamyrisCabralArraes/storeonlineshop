@@ -32,25 +32,39 @@ const ListProducts = ({ listProduct }: ListProductsProps) => {
     }
   };
   return (
-    <div>
+    <section className='flex flex-wrap w-3/4 gap-2 justify-between'>
       {listProduct.map((product: Product) => (
         <div
+          className='card w-72 bg-base-100 shadow-xl'
           key={product.id}
-          className='listaProdutos'
         >
-          <p>{product.title}</p>
-          <img
-            src={product.thumbnail}
-            alt=''
-          />
+          <figure className='px-10 pt-10'>
+            <img
+              className='rounded-xl'
+              src={product.thumbnail}
+              alt=''
+            />
+          </figure>
 
-          <Link to={`/${product.id}`}>Detalhes</Link>
-          <button onClick={() => handleClickAddShop(product.id)}>
-            adicionar a carrinho
-          </button>
+          <div className='card-body items-center justify-between text-center'>
+            <h1 className='card-title'>{product.title}</h1>
+
+            <Link
+              className='btn btn-active btn-ghost'
+              to={`/${product.id}`}
+            >
+              Detalhes
+            </Link>
+            <button
+              className='btn'
+              onClick={() => handleClickAddShop(product.id)}
+            >
+              adicionar a carrinho
+            </button>
+          </div>
         </div>
       ))}
-    </div>
+    </section>
   );
 };
 
