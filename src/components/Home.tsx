@@ -1,19 +1,16 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  getCategories,
-  getProductById,
-  getProductByItem,
-  getProductsFromCategoryAndQuery,
-} from '../services/api';
+import { getCategories, getProductByItem } from '../services/api';
+import Categories from './Categories';
+import ListProducts from './ListProducts';
 
 const Home = () => {
-  const [valor, setValor] = React.useState('');
-  const [categories, setCategories] = React.useState([]);
-  const [productName, setProductName] = React.useState('');
-  const [productId, setProductId] = React.useState('');
-  const [searchProduct, setSearchProduct] = React.useState(false);
-  const [listProduct, setListProduct] = React.useState('');
+  const [valor, setValor] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [productName, setProductName] = useState('');
+  const [productId, setProductId] = useState('');
+  const [searchProduct, setSearchProduct] = useState(false);
+  const [listProduct, setListProduct] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -22,9 +19,10 @@ const Home = () => {
     };
 
     fetchCategories();
-  });
+  }, []);
 
-  const handleSearch = () => {
+  const handleClickSearch = () => {
+    fetchCategoriesId();
     setSearchProduct(true);
   };
 
@@ -33,72 +31,45 @@ const Home = () => {
     setProductId(id);
   };
 
-  useEffect(() => {
-    const fetchCategoriesId = async () => {
-      const categorie = await getProductsFromCategoryAndQuery(
-        productId,
-        productName,
-      );
+  const fetchCategoriesId = async () => {
+    if (!valor) {
+      const categorie = await getProductByItem(productName);
       setListProduct(categorie.results);
-    };
-    fetchCategoriesId();
-  }, [productName]);
+    } else {
+      const categorie = await getProductByItem(valor);
+      setListProduct(categorie.results);
+    }
+  };
 
   const handleChange = ({
     target,
   }: React.ChangeEvent<HTMLInputElement>): void => {
-    setValor(target.value);
+    const value = target.value;
+    setValor(value.toLowerCase());
   };
-
-  useEffect(() => {
-    console.log(listProduct);
-  }, [productName]);
 
   return (
     <div>
-      {categories.map((categorie: { id: string; name: string }) => (
-        <div key={categorie.id}>
-          <p>
-            {' '}
-            <input
-              type='radio'
-              name='categorieProduct'
-              value={categorie.name}
-              onChange={() => handleRadio(categorie.name, categorie.id)}
-            />
-            {categorie.name}
-          </p>
-        </div>
-      ))}
-
-      {searchProduct ? (
-        <div>
-          <p>
-            Produto:{' '}
-            {listProduct.map(
-              (product: { id: string; title: string; thumbnail: string }) => (
-                <p key={product.id}>
-                  {product.title}
-                  <img
-                    src={product.thumbnail}
-                    alt=''
-                  />
-                </p>
-              ),
-            )}
-          </p>
-        </div>
-      ) : (
-        'Nenhum produto Listado'
-      )}
-
       <input
         type='text'
         placeholder='digite o produto'
         value={valor}
         onChange={(e) => handleChange(e)}
       />
-      <button onClick={handleSearch}>Buscar</button>
+      <button onClick={handleClickSearch}>Buscar</button>
+
+      <Categories
+        categories={categories}
+        handleRadio={handleRadio}
+      />
+
+      {searchProduct ? (
+        <div>
+          <ListProducts listProduct={listProduct} />
+        </div>
+      ) : (
+        'Nenhum produto Listado'
+      )}
 
       <Link to='/carrinho'>Carrinho de compras</Link>
     </div>
