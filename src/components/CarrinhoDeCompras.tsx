@@ -47,6 +47,13 @@ const CarrinhoDeCompras = () => {
     setTotalPrice(total);
   };
 
+  const btnEnd = () => {
+    localStorage.removeItem('carrinho');
+    setCarrinho([]);
+    setTotalPrice(0);
+    navigate('/');
+  };
+
   return (
     <div>
       CarrinhoDeCompras
