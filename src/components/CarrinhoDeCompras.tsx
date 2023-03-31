@@ -23,6 +23,7 @@ const CarrinhoDeCompras = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!localStorage.getItem('carrinho')) return;
     const carrinho = JSON.parse(localStorage.getItem('carrinho') || '');
     if (!carrinho) return;
     setCarrinho(carrinho);
@@ -57,33 +58,37 @@ const CarrinhoDeCompras = () => {
   return (
     <div>
       CarrinhoDeCompras
-      {carrinho.map((product: Product) => (
-        <div
-          className='listaProdutos'
-          key={product.id}
-        >
-          <p>{product.title}</p>
-          <img
-            src={product.thumbnail}
-            alt=''
-          />
-          <p>Quantidade disponivel: {product.available_quantity || ''}</p>
-          <p>
-            {product.shipping.free_shipping
-              ? 'Frete grátis'
-              : 'Calcule seu frete'}
-          </p>
-          <p>Preço: R$ {product.price}</p>
-
-          <button
-            onClick={() => {
-              handleRemove(product.id);
-            }}
+      {!carrinho ? (
+        <h1>Carrinho vazio</h1>
+      ) : (
+        carrinho.map((product: Product) => (
+          <div
+            className='listaProdutos'
+            key={product.id}
           >
-            Remover
-          </button>
-        </div>
-      ))}
+            <p>{product.title}</p>
+            <img
+              src={product.thumbnail}
+              alt=''
+            />
+            <p>Quantidade disponivel: {product.available_quantity || ''}</p>
+            <p>
+              {product.shipping.free_shipping
+                ? 'Frete grátis'
+                : 'Calcule seu frete'}
+            </p>
+            <p>Preço: R$ {product.price}</p>
+
+            <button
+              onClick={() => {
+                handleRemove(product.id);
+              }}
+            >
+              Remover
+            </button>
+          </div>
+        ))
+      )}
       <h4>Preço Total: {totalPrice}</h4>
       <button onClick={btnEnd}>Finalizar Compra</button>
       <Link to='/'>Voltar</Link>
