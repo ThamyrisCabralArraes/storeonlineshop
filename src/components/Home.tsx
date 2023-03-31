@@ -58,6 +58,8 @@ const Home = () => {
       />
       <button onClick={handleClickSearch}>Buscar</button>
 
+      <Link to='/carrinho'>Carrinho de compras</Link>
+
       <Categories
         categories={categories}
         handleRadio={handleRadio}
@@ -70,8 +72,6 @@ const Home = () => {
       ) : (
         'Nenhum produto Listado'
       )}
-
-      <Link to='/carrinho'>Carrinho de compras</Link>
     </div>
   );
 };
