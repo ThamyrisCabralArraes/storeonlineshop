@@ -63,7 +63,7 @@ const CarrinhoDeCompras = () => {
       {!carrinho ? (
         <h1>Carrinho vazio</h1>
       ) : (
-        <div className='flex justify-evenly items-center flex-col sm:flex-row'>
+        <div className='flex justify-evenly items-center flex-col sm:flex-row mb-10'>
           {carrinho.map((product: Product) => (
             <div
               className='card w-72 bg-base-100 shadow-xl'
