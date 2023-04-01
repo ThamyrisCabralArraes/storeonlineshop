@@ -50,31 +50,31 @@ const Home = () => {
 
   return (
     <main>
-      <section className='flex justify-between'>
-        <div className='m-4'>
-          <input
-            className='input input-bordered input-warning w-full max-w-xs mb-2'
-            type='text'
-            placeholder='digite o produto'
-            value={valor}
-            onChange={(e) => handleChange(e)}
-          />
-          <button
-            className='btn'
-            onClick={handleClickSearch}
-          >
-            Buscar
-          </button>
-        </div>
+      <section className='flex justify-center m-4'>
+        <input
+          className='input input-bordered input-warning w-full max-w-xs mb-2'
+          type='text'
+          placeholder='digite o produto'
+          value={valor}
+          onChange={(e) => handleChange(e)}
+        />
+        <button
+          className='btn ml-3'
+          onClick={handleClickSearch}
+        >
+          Buscar
+        </button>
+      </section>
+      <div className='flex justify-between '>
+        <h1 className='text-2xl font-bold ml-2'>Selecione uma categoria</h1>
         <Link
           className='btn btn-active btn-ghost'
           to='/carrinho'
         >
           Carrinho de compras
         </Link>
-      </section>
-
-      <div className='flex'>
+      </div>
+      <div className='flex '>
         <Categories
           categories={categories}
           handleRadio={handleRadio}
@@ -82,7 +82,7 @@ const Home = () => {
         {searchProduct ? (
           <ListProducts listProduct={listProduct} />
         ) : (
-          'Nenhum produto Listado'
+          <h1 className='text-2xl font-bold ml-60'>Nenhum produto Listado</h1>
         )}
       </div>
     </main>

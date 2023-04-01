@@ -1,7 +1,11 @@
 import React from 'react';
 
 const Header = () => {
-  return <header className='text-3xl font-bold '>Store Online Shop</header>;
+  return (
+    <header className='header'>
+      <h1 className='h1-header'>Store Online Shop</h1>
+    </header>
+  );
 };
 
 export default Header;

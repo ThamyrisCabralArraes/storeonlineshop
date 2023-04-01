@@ -12,41 +12,80 @@ type Product = {
     free_shipping: boolean;
   };
   available_quantity: number;
+  pictures: [
+    {
+      url: string;
+    },
+  ];
 };
 
 const Details = () => {
   let { id } = useParams();
-  const [product, setProduct] = useState<Product>({} as Product);
+  const [product, setProduct] = useState<Product>({
+    shipping: {
+      free_shipping: false,
+    },
+    pictures: [
+      {
+        url: '',
+      },
+    ],
+  } as Product);
 
   useEffect(() => {
     const fetchProduct = async () => {
       const response = await getProductById(id);
       setProduct(response);
-      console.log(product);
+      console.log(response);
     };
     fetchProduct();
   }, []);
-  return (
-    <div>
-      <h3>Detalhes do produto</h3>
 
-      <div key={product.id}>
-        <img
-          src={product.thumbnail}
-          alt={product.title}
-        />
-        <p>{product.title}</p>
-        <p>{product.warranty}</p>
-        <p>Quantidade disponivel: {product.available_quantity}</p>
-        <p>
-          {/* {product.shipping.free_shipping
-            ? 'Frete grátis'
-            : 'Calcule seu frete'}{' '} */}
-        </p>
-        <p>Preço: R$ {product.price}</p>
+  return (
+    <>
+      <div className='flex flex-row justify-end'>
+        <Link
+          className='btn'
+          to='/'
+        >
+          Voltar
+        </Link>
+        <Link
+          className='btn btn-active btn-ghost ml-6'
+          to='/carrinho'
+        >
+          Carrinho de compras
+        </Link>
       </div>
-      <Link to='/'>Voltar</Link>
-    </div>
+
+      <div className='flex flex-col  justify-center items-center'>
+        <h1 className='card-title'>{product.title}</h1>
+
+        <div className='card w-96 bg-base-100 shadow-xl m-6 flex text-center'>
+          <div className='carousel carousel-center p-4 space-x-4 bg-neutral rounded-box'>
+            {product.pictures.map((picture) => (
+              <div className='carousel-item w-64'>
+                <img
+                  key={picture.url}
+                  className='rounded-box'
+                  src={picture.url}
+                  alt={product.title}
+                />
+              </div>
+            ))}
+          </div>
+
+          <p>{product.warranty}</p>
+          <p>Quantidade disponivel: {product.available_quantity}</p>
+          <p>
+            {product.shipping.free_shipping
+              ? 'Frete grátis'
+              : 'Calcule seu frete'}
+          </p>
+          <p className='card-title p-5 mx-auto'>Preço: R$ {product.price}</p>
+        </div>
+      </div>
+    </>
   );
 };
 

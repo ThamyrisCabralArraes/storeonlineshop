@@ -57,60 +57,86 @@ const CarrinhoDeCompras = () => {
 
   return (
     <div>
-      CarrinhoDeCompras
+      <h1 className='text-center text-xl font-medium'>
+        Carrinho ({carrinho.length})
+      </h1>
       {!carrinho ? (
         <h1>Carrinho vazio</h1>
       ) : (
-        carrinho.map((product: Product) => (
-          <div
-            className='listaProdutos'
-            key={product.id}
-          >
-            <p>{product.title}</p>
-            <img
-              src={product.thumbnail}
-              alt=''
-            />
-            <p>Quantidade disponivel: {product.available_quantity || ''}</p>
-            <p>
-              {product.shipping.free_shipping
-                ? 'Frete grátis'
-                : 'Calcule seu frete'}
-            </p>
-            <p>Preço: R$ {product.price}</p>
-
-            <button
-              onClick={() => {
-                handleRemove(product.id);
-              }}
-              className='btn btn-square'
+        <div className='flex  justify-evenly items-center'>
+          {carrinho.map((product: Product) => (
+            <div
+              className='card w-72 bg-base-100 shadow-xl flex '
+              key={product.id}
             >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='h-6 w-6'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth='2'
-                  d='M6 18L18 6M6 6l12 12'
+              <figure className='px-10 pt-10'>
+                <img
+                  className='rounded-xl'
+                  src={product.thumbnail}
+                  alt=''
                 />
-              </svg>
-            </button>
-          </div>
-        ))
+              </figure>
+
+              <div className='card-body items-center justify-between text-center'>
+                <p className='card-title'>{product.title}</p>
+
+                <p className='card-normal'>
+                  Quantidade disponivel: {product.available_quantity || ''}
+                </p>
+
+                <p>
+                  {product.shipping.free_shipping
+                    ? 'Frete grátis'
+                    : 'Calcule seu frete'}
+                </p>
+                <p className='card-title'>Preço: R$ {product.price}</p>
+
+                <button
+                  onClick={() => {
+                    handleRemove(product.id);
+                  }}
+                  className='btn btn-square'
+                >
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='h-6 w-6'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke='currentColor'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth='2'
+                      d='M6 18L18 6M6 6l12 12'
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
-      <h4>Preço Total: {totalPrice}</h4>
-      <button onClick={btnEnd}>Finalizar Compra</button>
-      <Link
-        className='btn btn-active btn-ghost'
-        to='/'
-      >
-        Voltar
-      </Link>
+
+      <div className='flex m-7 justify-end  mt-8 items-center'>
+        <h4 className='mr-6 text-xl font-medium'>
+          Preço Total: {totalPrice.toFixed(2)}
+        </h4>
+
+        <button
+          className='btn mr-6'
+          onClick={btnEnd}
+        >
+          Finalizar Compra
+        </button>
+
+        <Link
+          className='btn btn-active btn-ghost'
+          to='/'
+        >
+          Voltar
+        </Link>
+      </div>
     </div>
   );
 };
