@@ -118,7 +118,7 @@ const CarrinhoDeCompras = () => {
         </div>
       )}
 
-      <div className='flex m-7 justify-end mt-8 items-center'>
+      <div className='flex m-7 justify-end mt-8 items-center mb-20'>
         <h4 className='mr-6 text-xl font-medium'>
           Preço Total: {totalPrice.toFixed(2)}
         </h4>
