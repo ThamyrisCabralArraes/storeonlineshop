@@ -82,7 +82,7 @@ const Home = () => {
         {searchProduct ? (
           <ListProducts listProduct={listProduct} />
         ) : (
-          <h1 className='text-2xl font-bold ml-60'>Nenhum produto Listado</h1>
+          <h1 className='text-2xl font-bold ml-10'>Nenhum produto Listado</h1>
         )}
       </div>
     </main>
