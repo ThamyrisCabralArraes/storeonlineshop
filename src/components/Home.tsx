@@ -68,7 +68,7 @@ const Home = () => {
       <div className='flex justify-between '>
         <h1 className='text-2xl font-bold ml-2'>Selecione uma categoria</h1>
         <Link
-          className='btn btn-active btn-ghost'
+          className='btn btn-active btn-ghost mr-6'
           to='/carrinho'
         >
           Carrinho de compras
@@ -82,7 +82,7 @@ const Home = () => {
         {searchProduct ? (
           <ListProducts listProduct={listProduct} />
         ) : (
-          <h1 className='text-2xl font-bold ml-10'>Nenhum produto Listado</h1>
+          <h1 className='text-2xl font-bold mx-auto'>Faça sua pesquisa</h1>
         )}
       </div>
     </main>

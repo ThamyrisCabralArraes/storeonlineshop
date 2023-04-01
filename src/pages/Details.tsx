@@ -51,7 +51,7 @@ const Details = () => {
           Voltar
         </Link>
         <Link
-          className='btn btn-active btn-ghost ml-6'
+          className='btn btn-active btn-ghost ml-6 mr-6'
           to='/carrinho'
         >
           Carrinho de compras
