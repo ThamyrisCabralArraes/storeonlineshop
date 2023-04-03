@@ -10,7 +10,7 @@ type CategoriesProps = {
 
 const Categories = ({ categories, handleRadio }: CategoriesProps) => {
   return (
-    <div className='mr-8 mb-20'>
+    <div className='mr-8 mb-20 ml-3'>
       {categories.map((categorie: { id: string; name: string }) => (
         <div key={categorie.id}>
           <p>
